@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<!-- Material Design for Bootstrap fonts and icons -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+
+		<!-- Material Design for Bootstrap CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+
+		<script src="https://code.highcharts.com/js/highcharts.js"></script>
+		<!-- <script src="http://code.highcharts.com/themes/dark-unica.js"></script> -->
+		<link rel="stylesheet" href="https://code.highcharts.com/css/highcharts.css">
+
+		<title>Cost Calculator for No Cost EMI</title>
+	</head>
+
+	<body>
+		<h1 align="center">No Cost EMI - The Cost Calculator</h1>
+
+		<div class="container-fluid">
+			<div class="row">
+					<p>Use this ....</p>
+			</div>
+		</div>
+
+		<div class="container">
+			<form class="form" action="javascript:void(0);" onSubmit="return onEMISubmit()">
+				<div class="card-group row">
+					<div class="card mx-auto">
+						<div class="card-header">
+							<h4 class="card-title">EMI Details</h4>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<label class="bmd-label-floating" for="amount">Amount</label>
+								<input class="form-control" type="number" id="amount" required />
+								<span class="bmd-help">Total amount to be paid</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-floating" for="duration">Duration</label>
+								<input class="form-control" type="number" id="duration" required />
+								<span class="bmd-help">Total duration (in months)</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-floating" for="discount">Instant Discount</label>
+								<input class="form-control" type="number" id="discount" required />
+								<span class="bmd-help">Total discount given for interest</span>
+								<span class="bmd-help">can be found on payment page (discount for interest)</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-static" for="startDate">Purchase Date</label>
+								<input class="form-control" type="date" id="startDate" required />
+								<span class="bmd-help">Date of Purchase</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-static" for="emiDate">First EMI Pay</label>
+								<input class="form-control" type="date" value="" id="emiDate" required />
+								<span class="bmd-help">First EMI Pay Date (same day, next month etc etc)</span>
+							</div>
+							<button type="submit" class="btn btn-primary btn-raised">Submit</button>
+						</div>
+					</div>
+					<div class="card mx-auto">
+							<div class="card-header">
+								<h4 class="card-title">Bank Details</h4>
+							</div>
+							<div class="card-body">
+								<div class="form-group">
+									<label class="bmd-label-floating" for="gst">Tax on Interest</label>
+									<input class="form-control" type="number" id="gst" value="18" required />
+									<span class="bmd-help">Tax added to interest paid (in %)</span>
+								</div>
+								<br />
+								<div class="switch">
+									<label>
+										<input type="checkbox" id="isSaving" checked>Saving account</input>
+										<span class="bmd-help">Is Saving account?</span>
+									</label>
+								</div>
+								<br />
+								<div id="savingsBox" class="form-group">
+									<label class="bmd-label-floating" for="savePercent">Saving Interest</label>
+									<input class="form-control" type="number" id="savePercent" value="4" required />
+									<span class="bmd-help">Interest Rate on saving Account (per annum)</span>
+								</div>
+								<br />
+								<div class="switch">
+									<label>
+										<input type="checkbox" id="isOneTimeProcessing" checked>Processing Fee one time?</input>
+										<span class="bmd-help">Is fee one time or per transaction?</span>
+									</label>
+								</div>
+								<br />
+								<div id="pFeeOneBox" class="form-group">
+									<label class="bmd-label-floating" for="pFeeOne">Processing Fee One Time</label>
+									<input class="form-control" type="number" id="pFeeOne" value="1" required />
+									<span class="bmd-help">Processing fee (in %)</span>
+								</div>
+								<div id="pFeeAllBox" class="form-group" style="display:none;">
+									<label class="bmd-label-floating" for="pFeeAll">Processing Fee Per Transaction</label>
+									<input class="form-control" type="number" id="pFeeAll" value="50" required />
+									<span class="bmd-help">Processing fee (amount per transaction)</span>
+								</div>
+								<div class="form-group">
+									<label class="bmd-label-floating" for="pFeeTax">Processing Fee Tax</label>
+									<input class="form-control" type="number" id="pFeeTax" value="18" required />
+									<span class="bmd-help">Processing fee Tax (in %)</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div id="results" style="display:none;">
+
+			<br />
+			<div class="col-md-6">
+				<h5>Results:</h5>
+			</div>
+
+			<div class="container">
+				<div class="card-group row">
+					<div class="card mx-auto">
+						<div class="card-header">
+							<h4 class="card-title">Results</h4>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<label class="bmd-label-static" for="loan">Loan Amount</label>
+								<input class="form-control" type="number" id="loan" disabled />
+								<span class="font-weight-light">Actual amount on which loan is taken</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-static" for="roi">Rate of Interest</label>
+								<input class="form-control" type="number" id="roi" disabled />
+								<span class="font-weight-light">Rate of interest for loan (% pa)</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-static" for="taxAmt">Taxed Amount</label>
+								<input class="form-control" type="number" id="taxAmt" disabled />
+								<span class="font-weight-light">Total Tax amount to be added (A)</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-static" for="feeAmt">Processing Fee</label>
+								<input class="form-control" type="number" id="feeAmt" disabled />
+								<span class="font-weight-light">Total processing fee to be added (B)</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-static" for="saved">Saving Acc. Interest</label>
+								<input class="form-control" type="number" id="saved" disabled />
+								<span class="font-weight-light">Total interest from saving (C)</span>
+							</div>
+							<div class="form-group">
+								<label class="bmd-label-static" for="total">Total Extra</label>
+								<input class="form-control-lg" type="number" value="" id="total" disabled />
+								<br />
+								<span class="font-weight-light">Total extra amount paid (A+B-C)</span>
+								<br />
+								<span class="font-weight-light">Negative means amount is saved</span>
+							</div>
+						</div>
+					</div>
+					<div class="card mx-auto">
+						<div class="card-header">
+							<h4 class="card-title">Graph</h4>
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<div id="t_chart"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row card">
+					<table id="dataTable" class="table text-center">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Month</th>
+								<th scope="col">Oustanding Loan</th>
+								<th scope="col">EMI</th>
+								<th scope="col">Interest</th>
+								<th scope="col">Principal Paid</th>
+								<th scope="col">OutStanding Principal</th>
+								<th scope="col">Tax</th>
+								<th scope="col">EMI+Tax</th>
+								<th scope="col">Saving Added</th>
+								<th scope="col">Processing</th>
+							</tr>
+						</thead>
+						<tbody id="dataTableBody"></tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row card">
+					<div id="b_chart"></div>
+				</div>
+			</div>
+
+		</div>
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+		<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+		<script type='text/javascript' src="./index.js"></script>
+
+	</body>
+</html>
