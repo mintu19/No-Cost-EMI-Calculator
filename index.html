@@ -39,17 +39,17 @@
 						<div class="card-body">
 							<div class="form-group">
 								<label class="bmd-label-floating" for="amount">Amount</label>
-								<input class="form-control" type="number" id="amount" required />
+								<input class="form-control" type="number" id="amount" value="15000" required />
 								<span class="bmd-help">Total amount to be paid</span>
 							</div>
 							<div class="form-group">
 								<label class="bmd-label-floating" for="duration">Duration</label>
-								<input class="form-control" type="number" id="duration" required />
+								<input class="form-control" type="number" id="duration" value="9" required />
 								<span class="bmd-help">Total duration (in months)</span>
 							</div>
 							<div class="form-group">
 								<label class="bmd-label-floating" for="discount">Instant Discount</label>
-								<input class="form-control" type="number" id="discount" required />
+								<input class="form-control" type="number" id="discount" value="750" required />
 								<span class="bmd-help">Total discount given for interest</span>
 								<span class="bmd-help">can be found on payment page (discount for interest)</span>
 							</div>
@@ -173,9 +173,7 @@
 							<h4 class="card-title">Graph</h4>
 						</div>
 						<div class="card-body">
-							<div class="form-group">
-								<div id="t_chart"></div>
-							</div>
+							<div id="t_chart" style="min-width:20em"></div>
 						</div>
 					</div>
 				</div>
@@ -230,8 +228,8 @@
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
-		<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.min.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.min.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
 		<script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
 		<script type='text/javascript' src="./index.js"></script>
 

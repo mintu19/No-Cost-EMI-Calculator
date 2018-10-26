@@ -144,7 +144,9 @@ function onEMISubmit() {
 
 	genChart(chartData);
 	genBarChart(months, barChartData);
-	document.getElementById("results").style.display = "block";
+	let resultsView = document.getElementById("results");
+	resultsView.style.display = "block";
+	resultsView.scrollIntoView();
 	return false;
 }
 
